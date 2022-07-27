@@ -6,7 +6,7 @@ let menuEl = document.getElementById('menu');
 let outputEl = document.getElementById('output');
 
 //contact array
-let Contacts = loadContacts(), emailval = false;
+let Contacts = loadContacts();
 // Go Btn - Menu Listener
 goBtnEl.addEventListener('click', goBtnHandler);
 
@@ -46,7 +46,7 @@ function displayContacts() {
 
 function addContact() {
   index = checkEmail();
-  if (!emailval){
+  if (index){
    Contacts.push({
     email: index,
     name: prompt("Name of Contact:"),
@@ -135,15 +135,13 @@ function checkEmail (email) {
 }
 function checkEmail() {
   index = prompt("Email of Contact: ");
-  emailval = false;
   for (i=0;i<Contacts.length;i++){
     if (index.toLowerCase() === Contacts[i].email.toLowerCase()){
       alert("Email already in use!");
-      emailval = true;
-      break;
+      return false;
+      
     }
   }
-  if (!emailval){
     return index;
-  }
+  
 }
